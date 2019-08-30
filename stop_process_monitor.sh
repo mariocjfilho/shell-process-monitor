@@ -4,4 +4,4 @@ pid=`cat process.pid`
 
 kill $pid
 
-rm process.pid
+# rm process.pid

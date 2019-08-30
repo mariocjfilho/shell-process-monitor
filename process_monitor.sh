@@ -3,12 +3,12 @@
 # Executando o script em background - nohup ./process_monitor.sh >> /dev/null &
 
 # Variáveis
-MAX_PCPU=95
-MAX_PMEM=40
-MAX_LOAD=12
+MAX_PCPU=100
+MAX_PMEM=15
+MAX_LOAD=8
 
 cpu_log_file="/home/mjoaquim/process_monitor/cpu_log_$(date -I).log"
-mem_log_file="/home/mjoaquim/process_monitor/cpu_log_$(date -I).log"
+mem_log_file="/home/mjoaquim/process_monitor/mem_log_$(date -I).log"
 load_log_file="/home/mjoaquim/process_monitor/load_log_$(date -I).log"
 
 main() {

@@ -3,13 +3,16 @@
 # Executando o script em background - nohup ./process_monitor.sh >> /dev/null &
 
 # Variáveis
-MAX_PCPU=100
+MAX_PCPU=150
 MAX_PMEM=15
 MAX_LOAD=8
+MAX_CPU_TEMPERATURE=70
 
 cpu_log_file="/home/mjoaquim/process_monitor/cpu_log_$(date -I).log"
 mem_log_file="/home/mjoaquim/process_monitor/mem_log_$(date -I).log"
 load_log_file="/home/mjoaquim/process_monitor/load_log_$(date -I).log"
+cpu_temp_log_file="/home/mjoaquim/process_monitor/cpu_temp_log_$(date -I).log"
+
 
 main() {
 
@@ -18,6 +21,7 @@ main() {
         cpu_monitor
         mem_monitor
         load_monitor
+        cpu_temperature_monitor
 
         sleep 2
 
@@ -90,6 +94,37 @@ load_monitor() {
         echo "[$(date)] - 5 processos que mais consumiram CPU: " >> $load_log_file
         echo "" >> $load_log_file
         echo -e $top_cpu_process >> $load_log_file
+    fi
+
+}
+
+cpu_temperature_monitor() {
+
+    # TODO - Check if this is default for all computers
+
+    cpu_temp=`sensors -u coretemp-isa-0000 | grep -i "temp1_input" | head -1 | cut -d ":" -f 2 | cut -d "." -f 1`
+
+    echo "CPU Temp: $cpu_temp"
+
+    if [[ $cpu_temp -ge $MAX_CPU_TEMPERATURE ]]
+    then
+        echo "Temperatura limite atingida"
+        echo "CPU Temp: $cpu_temp"
+
+        top_mem_process=`ps aux --sort=-pmem | head -n 5`
+        top_cpu_process=`ps aux --sort=-pcpu | head -n 5`
+
+        echo "" >> $cpu_temp_log_file
+        echo "[$(date)] - Temperatura limite atingida..." >> $cpu_temp_log_file
+        echo "[$(date)] - CPU Temp: $cpu_temp" >> $cpu_temp_log_file
+        
+        echo "[$(date)] - 5 processos que mais consumiram memória: " >> $cpu_temp_log_file
+        echo "" >> $cpu_temp_log_file
+        echo -e $top_mem_process >> $cpu_temp_log_file
+
+        echo "[$(date)] - 5 processos que mais consumiram CPU: " >> $cpu_temp_log_file
+        echo "" >> $cpu_temp_log_file
+        echo -e $top_cpu_process >> $cpu_temp_log_file
     fi
 
 }

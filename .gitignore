@@ -1,2 +1,4 @@
 *.log
 *.pid
+
+logs/*.log

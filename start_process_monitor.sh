@@ -1,5 +1,9 @@
 #!/bin/bash
 
-nohup ./process_monitor.sh >> /dev/null &
+base_folder="/home/mjoaquim/process_monitor"
 
-echo $! > process.pid
+nohup ${base_folder}/process_monitor.sh >> /dev/null &
+
+echo $! > ${base_folder}/process.pid
+
+${base_folder}/status_process_monitor.sh

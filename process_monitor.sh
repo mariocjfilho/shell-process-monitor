@@ -6,18 +6,21 @@
 MAX_PCPU=150
 MAX_PMEM=15
 MAX_LOAD=8
-MAX_CPU_TEMPERATURE=70
+MAX_CPU_TEMPERATURE=75
 
-cpu_log_file="/home/mjoaquim/process_monitor/cpu_log_$(date -I).log"
-mem_log_file="/home/mjoaquim/process_monitor/mem_log_$(date -I).log"
-load_log_file="/home/mjoaquim/process_monitor/load_log_$(date -I).log"
-cpu_temp_log_file="/home/mjoaquim/process_monitor/cpu_temp_log_$(date -I).log"
-
+base_log_folder="/home/mjoaquim/process_monitor/logs"
 
 main() {
 
+    mkdir -p $base_log_folder
+
     while [ true ]
     do
+        cpu_log_file="${base_log_folder}/cpu_log_$(date -I).log"
+        mem_log_file="${base_log_folder}/mem_log_$(date -I).log"
+        load_log_file="${base_log_folder}/load_log_$(date -I).log"
+        cpu_temp_log_file="${base_log_folder}/cpu_temp_log_$(date -I).log"
+
         cpu_monitor
         mem_monitor
         load_monitor

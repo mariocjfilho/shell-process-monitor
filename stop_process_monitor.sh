@@ -2,7 +2,7 @@
 
 base_folder="/home/mjoaquim/process_monitor"
 
-pid=`cat process.pid`
+pid=`cat ${base_folder}/process.pid`
 
 kill $pid
 

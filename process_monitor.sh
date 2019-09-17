@@ -83,20 +83,19 @@ load_monitor() {
         echo "Load Máximo atingido"
         echo "Load: $load"
 
-        top_mem_process=`ps aux --sort=-pmem | head -n 5`
-        top_cpu_process=`ps aux --sort=-pcpu | head -n 5`
-
         echo "" >> $load_log_file
         echo "[$(date)] - Load Máximo atingido..." >> $load_log_file
         echo "[$(date)] - Load: $load" >> $load_log_file
         
         echo "[$(date)] - 5 processos que mais consumiram memória: " >> $load_log_file
         echo "" >> $load_log_file
-        echo -e $top_mem_process >> $load_log_file
+        ps aux --sort=-pmem | head -n 5 >> $load_log_file
 
         echo "[$(date)] - 5 processos que mais consumiram CPU: " >> $load_log_file
         echo "" >> $load_log_file
-        echo -e $top_cpu_process >> $load_log_file
+        
+        ps aux --sort=-pcpu | head -n 5 >> $load_log_file
+
     fi
 
 }
@@ -114,20 +113,17 @@ cpu_temperature_monitor() {
         echo "Temperatura limite atingida"
         echo "CPU Temp: $cpu_temp"
 
-        top_mem_process=`ps aux --sort=-pmem | head -n 5`
-        top_cpu_process=`ps aux --sort=-pcpu | head -n 5`
-
         echo "" >> $cpu_temp_log_file
         echo "[$(date)] - Temperatura limite atingida..." >> $cpu_temp_log_file
         echo "[$(date)] - CPU Temp: $cpu_temp" >> $cpu_temp_log_file
         
         echo "[$(date)] - 5 processos que mais consumiram memória: " >> $cpu_temp_log_file
         echo "" >> $cpu_temp_log_file
-        echo -e $top_mem_process >> $cpu_temp_log_file
+        ps aux --sort=-pmem | head -n 5 >> $cpu_temp_log_file
 
         echo "[$(date)] - 5 processos que mais consumiram CPU: " >> $cpu_temp_log_file
         echo "" >> $cpu_temp_log_file
-        echo -e $top_cpu_process >> $cpu_temp_log_file
+        ps aux --sort=-pcpu | head -n 5 >> $cpu_temp_log_file
     fi
 
 }

@@ -6,6 +6,20 @@ pid_file=${base_folder}/process.pid
 
 option=$1
 
+status_process() {
+
+    pid=`cat ${pid_file}`
+
+    ps $pid
+
+    if [[ $? -eq 0 ]]
+    then
+        echo -e "\e[32mProcess STARTED"
+    else
+        echo -e "\e[91mProcess STOPPED"
+    fi
+}
+
 start_process() {
     echo "Starting..."
     echo ""
@@ -14,7 +28,8 @@ start_process() {
 
     echo $! > ${base_folder}/process.pid
 
-    ${base_folder}/status_process_monitor.sh
+    status_process
+    
 }
 
 check_process() {
@@ -29,20 +44,6 @@ check_process() {
             echo -e "\e[32mProcess already STARTED"
             exit 0;    
         fi
-    fi
-}
-
-status_process() {
-
-    pid=`cat ${pid_file}`
-
-    ps $pid
-
-    if [[ $? -eq 0 ]]
-    then
-        echo -e "\e[32mProcess STARTED"
-    else
-        echo -e "\e[91mProcess STOPPED"
     fi
 }
 

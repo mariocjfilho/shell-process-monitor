@@ -14,9 +14,9 @@ status_process() {
 
     if [[ $? -eq 0 ]]
     then
-        echo -e "\e[32mProcess STARTED"
+        echo -e "Process STARTED"
     else
-        echo -e "\e[91mProcess STOPPED"
+        echo -e "Process STOPPED"
     fi
 }
 
@@ -41,7 +41,7 @@ check_process() {
 
         if [[ $? -eq 0 ]]
         then
-            echo -e "\e[32mProcess already STARTED"
+            echo -e "Process already STARTED"
             exit 0;    
         fi
     fi

@@ -1,5 +1,8 @@
 # Shell Process and Load Monitor
 
+### Requirements
+- lm-sensors (for Ubuntu `sudo apt install lm-sensors`)
+
 ### Configuring
 
 Change the value of variable `base_log_folder` located on process_monitor.sh file to the location that you would like to log.

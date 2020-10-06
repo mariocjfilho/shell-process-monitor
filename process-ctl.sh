@@ -1,6 +1,8 @@
 #!/bin/bash
 
-base_folder="/home/mjoaquim/process_monitor"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+base_folder=$DIR
 
 pid_file=${base_folder}/process.pid
 
